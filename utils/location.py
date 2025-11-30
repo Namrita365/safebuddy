@@ -1,6 +1,14 @@
-def get_user_location():
+import requests
+
+def get_location():
     """
-    Placeholder function for user location.
-    Returns a dummy latitude/longitude.
+    Returns approximate latitude, longitude and Google Maps link
     """
-    return {"latitude": 28.6139, "longitude": 77.2090}  # Example: New Delhi
+    try:
+        response = requests.get("https://ipapi.co/json/").json()
+        lat = response.get("latitude")
+        lon = response.get("longitude")
+        maps_link = f"https://www.google.com/maps?q={lat},{lon}"
+        return lat, lon, maps_link
+    except Exception as e:
+        return None, None, None

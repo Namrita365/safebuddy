@@ -1,17 +1,16 @@
+from utils.gpt_client import GPTClient
+
 class PlannerAgent:
     """
-    Planner Agent:
-    - Takes user input
-    - Plans the next steps for SafeBuddy workflow
+    PlannerAgent: decides how to respond based on user input.
+    For simplicity, it passes the text to GPT.
     """
-
     def __init__(self):
-        pass
+        self.gpt_client = GPTClient()
 
-    def create_plan(self, user_input: str) -> str:
+    def plan(self, user_input: str) -> str:
         """
-        Generate a simple plan based on user input.
-        For now, it just returns a text describing the plan.
+        Creates a 'plan' — here it’s just sending the input to GPT for a response.
         """
-        plan = f"Plan generated for input: '{user_input}'"
-        return plan
+        prompt = f"Respond to the user in a friendly, helpful way: {user_input}"
+        return self.gpt_client.ask(prompt)
